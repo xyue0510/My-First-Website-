@@ -1,38 +1,468 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My First Website</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Xiaonan Yue — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
+    :root {
+      --bg: #f5f2ee;
+      --ink: #1a1714;
+      --accent: #8b6f47;
+      --accent-light: #c4a882;
+      --muted: #7a7168;
+      --card: #ffffff;
+      --rule: #d4cdc4;
+      --bar-fill: #8b6f47;
+      --bar-track: #ddd8d0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--ink);
+      color: var(--bg);
       text-align: center;
-      padding: 50px;
-      background: #f4f4f4;
+      padding: 72px 24px 60px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: auto;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 110%, #8b6f4722 0%, transparent 70%);
     }
 
-    h1 {
-      color: #222;
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--accent-light);
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1;
     }
 
-    p {
-      color: #555;
-      font-size: 18px;
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 7vw, 5rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+      line-height: 1.1;
     }
+
+    .hero-contact {
+      margin-top: 18px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      color: var(--accent-light);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-contact a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero-contact a:hover { text-decoration: underline; }
+
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── SECTION ── */
+    section { margin-top: 52px; }
+
+    .section-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ── SUMMARY ── */
+    .summary-text {
+      font-size: 0.97rem;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 10px;
+    }
+
+    .skill-tag {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 9px 14px;
+      font-size: 0.83rem;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      flex-shrink: 0;
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-meta { padding-top: 2px; }
+
+    .exp-company {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    .exp-role {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 3px 0;
+    }
+
+    .exp-date {
+      font-size: 0.77rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      font-weight: 500;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .exp-bullets li {
+      font-size: 0.875rem;
+      color: var(--muted);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.65;
+    }
+
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent-light);
+      font-size: 0.7rem;
+      top: 3px;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 22px 26px;
+    }
+
+    .edu-school { font-size: 0.82rem; color: var(--muted); }
+
+    .edu-degree {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 4px 0 6px;
+    }
+
+    .edu-gpa {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.77rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 30px;
+    }
+
+    /* ── LANGUAGES ── */
+    .lang-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .lang-item {}
+
+    .lang-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 7px;
+    }
+
+    .lang-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .lang-level {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .lang-bar-track {
+      width: 100%;
+      height: 5px;
+      background: var(--bar-track);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .lang-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 99px;
+      transition: width 1.2s cubic-bezier(.16,1,.3,1);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px 0 0;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      border-top: 1px solid var(--rule);
+      margin-top: 60px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .exp-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+
+    /* ── FADE-IN ANIMATION ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    section:nth-child(1) .fade-in { animation-delay: 0.1s; }
+    section:nth-child(2) .fade-in { animation-delay: 0.2s; }
+    section:nth-child(3) .fade-in { animation-delay: 0.3s; }
+    section:nth-child(4) .fade-in { animation-delay: 0.4s; }
+    section:nth-child(5) .fade-in { animation-delay: 0.5s; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Hello, I made my first website!</h1>
-    <p>This website is hosted for free using GitHub Pages.</p>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="avatar">XY</div>
+  <h1>Xiaonan Yue</h1>
+  <div class="hero-contact">
+    <a href="mailto:xiaonanyue980510@gmail.com">xiaonanyue980510@gmail.com</a>
+    <span>|</span>
+    <a href="tel:6265602917">(626) 560-2917</a>
+    <span>|</span>
+    <span>Fontana, CA 92336</span>
   </div>
+</header>
+
+<main class="page">
+
+  <!-- SUMMARY -->
+  <section>
+    <div class="section-label">Summary</div>
+    <p class="summary-text fade-in">
+      Motivated and dependable college student with several years of customer service and leadership experience in fast-paced environments. Experienced in front desk operations, staff scheduling, shift coordination, and resolving customer concerns professionally. Known for staying organized under pressure, supporting teams, and creating a welcoming experience for every guest and client.
+    </p>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="section-label">Skills</div>
+    <div class="skills-grid fade-in">
+      <div class="skill-tag">Team leadership</div>
+      <div class="skill-tag">Staff scheduling &amp; coordination</div>
+      <div class="skill-tag">Customer service &amp; support</div>
+      <div class="skill-tag">Front desk operations</div>
+      <div class="skill-tag">Appointment management</div>
+      <div class="skill-tag">Cash handling &amp; payment processing</div>
+      <div class="skill-tag">Conflict resolution</div>
+      <div class="skill-tag">Multitasking in fast-paced environments</div>
+      <div class="skill-tag">Team collaboration</div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section>
+    <div class="section-label">Experience</div>
+    <div class="fade-in">
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-company">Massage Palance · Rancho Cucamonga, CA</div>
+          <div class="exp-role">General Manager</div>
+          <div class="exp-date">01/2019 — Current</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Lead daily operations by coordinating staff schedules and ensuring proper shift coverage</li>
+          <li>Manage employee availability, assign responsibilities, and support staff to maintain smooth workflow</li>
+          <li>Schedule and confirm client appointments while maintaining accurate and organized records</li>
+          <li>Provide front desk support by greeting clients, answering calls, and handling payments professionally</li>
+          <li>Resolve customer concerns calmly and efficiently to maintain high service standards and client satisfaction</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-company">Seven Grams · Rancho Cucamonga, CA</div>
+          <div class="exp-role">Server</div>
+          <div class="exp-date">01/2024 — 06/2024</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Delivered fast, attentive service to enhance guest satisfaction while managing multiple tables in a high-volume environment</li>
+          <li>Took accurate food and beverage orders to ensure timely delivery and meet guest expectations</li>
+          <li>Processed cash and card transactions responsibly and accurately</li>
+          <li>Maintained cleanliness and organization of dining areas to facilitate efficient service and create a welcoming atmosphere</li>
+          <li>Worked closely with team members and kitchen staff to ensure a positive guest experience</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-company">Shogun Restaurant · Rancho Cucamonga, CA</div>
+          <div class="exp-role">Host</div>
+          <div class="exp-date">03/2021 — 12/2021</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Greeted and seated guests, fostering a welcoming and professional atmosphere to enhance customer experience</li>
+          <li>Managed waitlists and organized table rotations to support efficient service flow</li>
+          <li>Answered phone calls and managed reservations, ensuring accurate scheduling to optimize guest flow</li>
+          <li>Communicated clearly with servers and kitchen staff to keep operations running smoothly</li>
+          <li>Supported excellent customer service in a fast-paced environment</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section>
+    <div class="section-label">Education &amp; Training</div>
+    <div class="edu-card fade-in">
+      <div class="edu-school">California State University, San Bernardino · San Bernardino, CA</div>
+      <div class="edu-degree">Bachelor of Science in Information Systems and Technology</div>
+      <span class="edu-gpa">GPA 3.84</span>
+    </div>
+  </section>
+
+  <!-- LANGUAGES -->
+  <section>
+    <div class="section-label">Languages</div>
+    <div class="lang-list fade-in">
+
+      <div class="lang-item">
+        <div class="lang-header">
+          <span class="lang-name">Chinese (Mandarin)</span>
+          <span class="lang-level">Native / Bilingual</span>
+        </div>
+        <div class="lang-bar-track">
+          <div class="lang-bar-fill" style="width: 100%;"></div>
+        </div>
+      </div>
+
+      <div class="lang-item">
+        <div class="lang-header">
+          <span class="lang-name">English</span>
+          <span class="lang-level">Professional</span>
+        </div>
+        <div class="lang-bar-track">
+          <div class="lang-bar-fill" style="width: 100%;"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 Xiaonan Yue &nbsp;·&nbsp; All rights reserved</p>
+</footer>
+
 </body>
 </html>
